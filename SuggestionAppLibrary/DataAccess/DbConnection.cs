@@ -5,7 +5,7 @@ namespace SuggestionAppLibrary.DataAccess;
 
 public class DbConnection
 {
-   private readonly IConfiguration configuration;
+   private readonly IConfiguration _configuration;
    private readonly IMongoDatabase _db;
    private string _connectionId = "MongoDB";
 
@@ -22,9 +22,9 @@ public class DbConnection
    public IMongoCollection<SuggestionModel> SuggestionCollection { get; private set; }
 
 
-   public DbConnection(IConfiguration _configuration)
+   public DbConnection(IConfiguration configuration)
    {
-      configuration = _configuration;
+      _configuration = configuration;
       Client = new MongoClient(_configuration.GetConnectionString(_connectionId));
       DbName = _configuration["DatabaseName"];
       _db = Client.GetDatabase(DbName);
